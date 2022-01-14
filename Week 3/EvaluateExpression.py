@@ -1,4 +1,3 @@
-
 def EvaluateExpression(L):
   stack=[]
   Z=[i for i in L.split(" ")]
@@ -13,7 +12,3 @@ def EvaluateExpression(L):
     else:
       stack.append(Z[i])
   return stack[0]
-
-L="100 200 + 2 / 5 * 7 +"
-print(EvaluateExpression(L))
-
