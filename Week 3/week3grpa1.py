@@ -25,3 +25,5 @@ def DishPrepareOrder(L):
     m=m+F[i]
   
   return m
+nums = eval(input())
+print(DishPrepareOrder(nums))

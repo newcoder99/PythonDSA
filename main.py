@@ -1,19 +1,39 @@
+class Indegree:
+    def __init__(self):
+        self.ind_list = {}
+        self.ind_mat = {}
 
-def EvaluateExpression(L):
-  stack=[]
-  Z=[i for i in L.split(" ")]
-  ops = { "+": (lambda x,y: x+y), "-": (lambda x,y: x-y),"*":(lambda x,y: x*y),"/":(lambda x,y: float(x/y)),"**":(lambda x,y: x**y)}
-  operator=['+','-','/','*','**']
-  for i in range(0,len(Z)):
-    if(Z[i] in operator):
-      value1=float(stack.pop())
-      value2=float(stack.pop())
-      value3=ops[Z[i]](value2,value1)
-      stack.append(value3)
-    else:
-      stack.append(Z[i])
-  return stack[0]
-
-L="100 200 + 2 / 5 * 7 +"
-print(EvaluateExpression(L))
-
+    def Indegree_List(self,GList):
+      IndegreeDict={}
+      for key,value in GList.items():
+        if(key not in IndegreeDict):
+            IndegreeDict[key]=1
+        for i in value:
+          if(i not in IndegreeDict):
+            IndegreeDict[i]=1
+          else:
+            IndegreeDict[i]=IndegreeDict[i]+1
+      
+      return IndegreeDict
+    
+    def Indegree_Mat(self,GMat):
+      IndegreeDict={}
+      for i in range(0,len(GMat)):
+        for j in range(0,len(GMat[i])):
+          if(j not in IndegreeDict.keys()):
+            IndegreeDict[j]=0
+          if(GMat[i][j]==1):
+            IndegreeDict[j]=IndegreeDict[j]+1
+          
+      return IndegreeDict
+GList=eval(input())
+GMat = eval(input())
+G = Indegree()
+IGL = G.Indegree_List(GList)
+IGM = G.Indegree_Mat(GMat)
+print('For adjacency list')
+for i in range(len(GList)):
+    print(i,' = ',IGL[i])
+print('For adjacency matrix')
+for i in range(len(GMat)):
+    print(i,' = ',IGM[i])

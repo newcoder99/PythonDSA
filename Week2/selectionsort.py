@@ -1,12 +1,17 @@
+def selectionSort(L):
+  if(len(L)==0 or len(L)==1):
+    return L
+  for step in range(len(L)):
+    min_idx = step
 
-def selectionsort(A):
-    if(len(A)==0 or len(A)==1):
-      return A
-    for i in range(0,len(A)):
-      for j in range(0,len(A)):
-        if(A[i]<A[j]):
-          (A[i],A[j])=(A[j],A[i])
-    return A
+    for i in range(step + 1, len(L)):
+        if L[i] < L[min_idx]:
+           min_idx = i
+    (L[step], L[min_idx]) = (L[min_idx], L[step])
 
-A=[1,4,2,3]
-print(selectionsort(A))
+
+  return L
+
+
+L=[3,4,1,2,5]
+print(selectionSort(L))
