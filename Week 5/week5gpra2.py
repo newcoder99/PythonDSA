@@ -1,13 +1,13 @@
 def IsNegativeWeightCyclePresent(wl):
     distance = {}
     s = min(list(wl.keys()))
-    for u in wl.keys():  
+    for u in wl.keys():
         distance[u] = 9999999
 
     
     distance[s] = 0
     r = len(list(wl.keys()))
-    
+    print(r)
     for i in range (r-1):
         for u in wl.keys():
             for v,d in wl[u]:

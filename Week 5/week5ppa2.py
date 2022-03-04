@@ -1,21 +1,30 @@
-
-#Vertices are expected to be labelled as single letter or single digit 
-
-#Sort and arrange the result for uniformity
-def ArrangeResult(result):
-  res = []
-  for item in result:
-    s = ""
-    for i in item:
-      s += str(i)    
-    res.append(s)
-  res.sort() 
-  return res
-
-v = [item for item in input().split(" ")]
-Alist = {}
-for i in v:
-  Alist[i] = [item for item in input().split(" ") if item != '']
-source = input()
-dest = input()
-print(ArrangeResult(findAllPaths(v, Alist, source, dest)))
+def min_cost(wl, source, destination):
+    
+    (rt, distance) = ({}, {})
+    
+    for i in wl.keys():
+        rt[i] = []
+        distance[i] = 10000000000000
+        
+    
+    distance[source] = 0
+    rt[source] = [source]
+    
+    for u in wl.keys():
+        for v in wl.keys():
+            for childV, cost in wl[v]:
+                if(distance[childV] > cost+distance[v]):
+                    rt[childV] = rt[v]+[childV]
+                    distance[childV] = cost+distance[v]
+                    
+    return (distance[destination], rt[destination])
+size = int(input())
+edges = eval(input())
+s = int(input())
+d = int(input())
+WL = {}
+for i in range(size):
+    WL[i] = []
+for ed in edges: #for create list for directed graph
+    WL[ed[0]].append((ed[1],ed[2]))
+print(min_cost(WL,s,d))
